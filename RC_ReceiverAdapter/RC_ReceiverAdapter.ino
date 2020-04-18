@@ -7,7 +7,9 @@
 #include "Joystick.h"
 
 // Declare joystick object
-Joystick_ Joystick;
+// Passing optional parameters to make it just a two channel, buttonless one (see library doco for more details)
+Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_JOYSTICK,0,0,true,true,false,false,false,false,false,false,false,false,false);
+;
 
 // Which pins on the micro are connected to the receiver
 #define STEERING_PIN 2
