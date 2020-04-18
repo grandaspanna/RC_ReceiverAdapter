@@ -59,5 +59,14 @@ Download the library referenced here: https://github.com/MHeironimus/ArduinoJoys
 Now, you can grab the code from this repository. You only need the single .ino file Open this in the Arduino IDE.
 
 Select the right board type from the "Tools" menu:
+![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(47).png )
+
+Also, make sure the correct USB port is selected:
+![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(48).png )
+
+With all of that, you can now hit the "Upload" button in the upper left:
+![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(49).png )
+
+The compilation process will take place and then it should upload the code to the board. Hopefully, you'll see a success message in the lower status window.
 
 
