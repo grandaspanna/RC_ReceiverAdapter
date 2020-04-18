@@ -6,6 +6,9 @@
 // Thanks and ref to: https://github.com/MHeironimus/ArduinoJoystickLibrary
 #include "Joystick.h"
 
+// Declare joystick object
+Joystick_ Joystick;
+
 // Which pins on the micro are connected to the receiver
 #define STEERING_PIN 2
 #define THROTTLE_PIN 3
@@ -37,6 +40,9 @@ void setup() {
 
   // Initialise the joystick object
   Joystick.begin();
+  // Set the axes range
+  Joystick.setXAxisRange(-127,127);
+  Joystick.setYAxisRange(-127,127);
 
   // Attach an interrupt to each pin where the receiver is connected.
   attachInterrupt(STEERING_INTERRUPT_PIN,&changing_steering,CHANGE);
