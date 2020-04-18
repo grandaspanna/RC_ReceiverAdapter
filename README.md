@@ -79,29 +79,37 @@ Press the Windows “start” button and type “set up usb game” and the foll
 ![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(36).png )
 
 Select that one and it will take you to this screen:
+
 ![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(37).png )
 
 Press the “Properties” button and the following window appears:
+
 ![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(38).png )
 
 Choose the “Settings” tab in the upper left:
+
 ![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(39).png )
 
 And now press the “Calibrate…” button.
+
 ![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(40).png )
 
 Press “Next>”
 Make sure your radio is on, the receiver is showing connected and leave throttle and steering at neutral.
+
 ![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(41).png )
 
 Press “Next>”
+
 ![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(42).png )
 
 Now, move the steering and throttle the full range of travel in all directions a few times. Eventually, when left in their neutral positions, the cross hair will be relatively close to the centre of the square. It may bobble slightly, this is normal.
 Press “Next>” a few times until you get to this view. The additional dialog windows can be ignored since we are only setting up 2 channels.
+
 ![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(43).png )
 
 The controller should now be ready to use in any games that support a two channel joystick.
+
 ![image](https://github.com/grandaspanna/RC_ReceiverAdapter/blob/master/images/Screenshot%20(44).png )
 
 
