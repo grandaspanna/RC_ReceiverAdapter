@@ -7,23 +7,23 @@
 #include "Joystick.h"
 
 // Declare joystick object
-// Passing optional parameters to make it just a two channel, buttonless one (see library doco for more details)
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_JOYSTICK,0,0,true,true,false,false,false,false,false,false,false,false,false);
-;
 
 // Which pins on the micro are connected to the receiver
 #define STEERING_PIN 2
 #define THROTTLE_PIN 3
 
 // This maps the pin numbers to their corresponding interrupt identifier
-#define STEERING_INTERRUPT_PIN digitalPinToInterrupt(2)
-#define THROTTLE_INTERRUPT_PIN digitalPinToInterrupt(3)
+#define STEERING_INTERRUPT_PIN digitalPinToInterrupt(STEERING_PIN)
+#define THROTTLE_INTERRUPT_PIN digitalPinToInterrupt(THROTTLE_PIN)
 
 // These four values are updated by interrupts to capture the current steering and throttle values
 volatile unsigned long start_steering;
 volatile unsigned long start_throttle;
 volatile int steering_value;
 volatile int throttle_value;
+volatile boolean new_throttle_value;
+volatile boolean new_steering_value;
 
 // To make the code a little more portable, we use these to hold the register masks
 // that are used for a fast read off the port
@@ -41,7 +41,7 @@ void setup() {
   throttle_pin_mask = digitalPinToBitMask(THROTTLE_PIN);
 
   // Initialise the joystick object
-  Joystick.begin();
+  Joystick.begin(false);
   // Set the axes range
   Joystick.setXAxisRange(-127,127);
   Joystick.setYAxisRange(-127,127);
@@ -55,16 +55,30 @@ void loop() {
   // All we do here is loop and write the current x,y values to the joystick interface
   // The steering and throttle values are updated in the background automatically by the interrupt routines
 
+  boolean updated_joystick = false;
+  
   // For safety, just make sure the values are in a reasonable range
   steering_value = constrain(steering_value,1000,2000);
   throttle_value = constrain(throttle_value,1000,2000);
 
   // Write the values, scaled to -127 to 127
-  Joystick.setXAxis(map(steering_value,1000,2000,127,-127));
-  Joystick.setYAxis(map(throttle_value,1000,2000,127,-127));
+  // Check to see if there's an updated value. If so, post it.
+  if(new_steering_value){
+    Joystick.setXAxis(map(steering_value,1000,2000,127,-127));
+    new_steering_value = false;
+    updated_joystick = true;
+  }
+  if(new_throttle_value){
+    Joystick.setYAxis(map(throttle_value,1000,2000,127,-127));
+    new_throttle_value = false;
+    updated_joystick = true;
+  }
+  // If there's any new data, send it out on the USB port
+  if(updated_joystick){
+    Joystick.sendState();
+    updated_joystick = false;
+  }
 
-  // Arbitrary delay, in milliseconds
-  delay(8);
 }
 
 void changing_steering(){
@@ -81,6 +95,7 @@ void changing_steering(){
   else{
     // We've transitioned to off, so report how long it was on for
     steering_value = micros() - start_steering;
+    new_steering_value = true;
   }
     
 }
@@ -101,6 +116,7 @@ void changing_throttle(){
   else{
     // We've transitioned to off, so report how long it was on for
     throttle_value = micros() - start_throttle;
+    new_throttle_value = true;
   }
 }
 
